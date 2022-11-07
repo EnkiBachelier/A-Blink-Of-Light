@@ -1019,23 +1019,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2032879209 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6240035763930736746, guid: d2872845b3b952547aa33af5380c89dc, type: 3}
-  m_PrefabInstance: {fileID: 6240035763278867971}
-  m_PrefabAsset: {fileID: 0}
---- !u!168 &2032879210
-AudioEchoFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2032879209}
-  m_Enabled: 1
-  m_Delay: 500
-  m_DecayRatio: 0.5
-  m_WetMix: 1
-  m_DryMix: 1
 --- !u!1001 &2044329620169120646
 PrefabInstance:
   m_ObjectHideFlags: 0

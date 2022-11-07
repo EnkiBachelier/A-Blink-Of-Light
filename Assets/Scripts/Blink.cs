@@ -26,12 +26,6 @@ public class Blink : MonoBehaviour
     private Material activeBlinkMaterial;
     [SerializeField]
     private Material inactiveBlinkMaterial;
-    [SerializeField]
-    private float offSetBlinkInHandX = 0;
-    [SerializeField]
-    private float offSetBlinkInHandY = 0;
-    [SerializeField]
-    private float offSetBlinkInHandZ = 0;
 
     private void Start()
     {
