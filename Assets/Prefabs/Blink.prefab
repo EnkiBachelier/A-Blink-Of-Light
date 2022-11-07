@@ -223,15 +223,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
   playerBody: {fileID: 0}
-  ProjectileStartSpeed: 1
+  ProjectileStartSpeed: 10
   OffsetForwardShoot: 0
   greenLight: {fileID: 4079968976832489235}
   positionInHand: {fileID: 0}
   activeBlinkMaterial: {fileID: 2100000, guid: fab3f55fc50bc66439d0b0e2ec3d5010, type: 2}
   inactiveBlinkMaterial: {fileID: 2100000, guid: 6036e46bebec6c3409734a5e3a30421f, type: 2}
-  offSetBlinkInHandX: 0.5
-  offSetBlinkInHandY: 0
-  offSetBlinkInHandZ: 0.5
 --- !u!114 &2032879217
 MonoBehaviour:
   m_ObjectHideFlags: 0
