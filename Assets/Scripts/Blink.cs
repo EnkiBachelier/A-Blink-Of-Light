@@ -7,8 +7,7 @@ public class Blink : MonoBehaviour
     public PlayerController playerInput;
     public Transform playerBody;
 
-    public float ProjectileStartSpeed = 50;
-    public float OffsetForwardShoot = 2;
+    public float ProjectileStartSpeed = 10;
 
     public bool isInHand { get; private set; } = false;
     public bool isMoving { get; private set; } = false;
