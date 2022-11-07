@@ -34,7 +34,7 @@ public class Blink : MonoBehaviour
         thisMeshRenderer = transform.GetComponent<MeshRenderer>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (thisRigidBody.velocity != Vector3.zero && !isInHand)
             isMoving = true;
@@ -44,6 +44,7 @@ public class Blink : MonoBehaviour
         CheckBlinkStatus();
     }
 
+
     private void CheckBlinkStatus()
     {
         if (playerInput.wantsToLaunchBlink && isInHand)
@@ -51,9 +52,8 @@ public class Blink : MonoBehaviour
             thisSphereCollider.enabled = true;
             greenLight.enabled = true;
             transform.parent = null;
-            transform.position = transform.position + transform.forward * OffsetForwardShoot;
-            thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
             thisMeshRenderer.material = activeBlinkMaterial;
+            thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
             isInHand = false;
         }
 
@@ -62,10 +62,12 @@ public class Blink : MonoBehaviour
 
             thisSphereCollider.enabled = false;
             greenLight.enabled = false;
+            thisMeshRenderer.material = inactiveBlinkMaterial;
+            thisRigidBody.velocity = Vector3.zero;
+            thisRigidBody.angularVelocity = Vector3.zero;
             transform.parent = positionInHand;
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
-            thisMeshRenderer.material = inactiveBlinkMaterial;
             isInHand = true;
         }
     }
