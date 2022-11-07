@@ -13,9 +13,12 @@ public class Blink : MonoBehaviour
     private bool isBlinkInHand = false;
     private Rigidbody thisRigidBody;
     private SphereCollider thisSphereCollider;
-
     private MeshRenderer thisMeshRenderer;
 
+    [SerializeField]
+    private Light greenLight;
+    [SerializeField]
+    private Transform positionInHand;
     [SerializeField]
     private Material activeBlinkMaterial;
     [SerializeField]
@@ -43,6 +46,8 @@ public class Blink : MonoBehaviour
         if (playerInput.wantsToLaunchBlink && isBlinkInHand)
         {
             thisSphereCollider.enabled = true;
+            greenLight.enabled = true;
+            transform.parent = null;
             transform.position = transform.position + transform.forward * OffsetForwardShoot;
             thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
             thisMeshRenderer.material = activeBlinkMaterial;
@@ -51,8 +56,12 @@ public class Blink : MonoBehaviour
 
         if ((isBlinkInHand) || (playerInput.wantsToRecoverBlink && !isBlinkInHand))
         {
+
             thisSphereCollider.enabled = false;
-            transform.position = new Vector3(playerBody.position.x + offSetBlinkInHandX, playerBody.position.y + offSetBlinkInHandY, playerBody.position.z + offSetBlinkInHandZ);
+            greenLight.enabled = false;
+            transform.parent = positionInHand;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
             thisMeshRenderer.material = inactiveBlinkMaterial;
             isBlinkInHand = true;
         }
