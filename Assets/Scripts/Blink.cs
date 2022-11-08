@@ -33,10 +33,12 @@ public class Blink : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Used for the sound
         if (thisRigidBody.velocity != Vector3.zero && !isInHand)
             isMoving = true;
         else
             isMoving = false;
+
         CheckBlinkStatus();
     }
 
