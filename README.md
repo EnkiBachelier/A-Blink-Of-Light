@@ -4,7 +4,7 @@ Prototype d'un FPS non-violent/horrifique/plateformer, réalisé dans le cadre d
 
 #Où en est le projet ?
 
-Commencé il y a 1 jour, l'état actuel du projet est le suivant :
+Commencé il y a 2 jour, l'état actuel du projet est le suivant :
 - Modélisation des lucioles réalisée
 - le Blink a été importé
 - Le Blink peut être lancé et récupéré
