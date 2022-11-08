@@ -612,11 +612,8 @@ MonoBehaviour:
   playerBody: {fileID: 0}
   thisBlinkAnimation: {fileID: 3054504081373897862}
   ProjectileStartSpeed: 10
-  thisMeshRenderer: {fileID: 2537054649879082896}
   greenLight: {fileID: 2537054651057851238}
   positionInHand: {fileID: 0}
-  activeBlinkMaterial: {fileID: 2100000, guid: fab3f55fc50bc66439d0b0e2ec3d5010, type: 2}
-  inactiveBlinkMaterial: {fileID: 2100000, guid: 6036e46bebec6c3409734a5e3a30421f, type: 2}
 --- !u!135 &846161774758660496
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -658,7 +655,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 838baec2f353ad2489b39d923aeace19, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.281
   m_Pitch: 1
   Loop: 0
   Mute: 0
