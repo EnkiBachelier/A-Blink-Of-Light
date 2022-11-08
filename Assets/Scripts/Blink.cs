@@ -6,6 +6,7 @@ public class Blink : MonoBehaviour
 {
     public PlayerController playerInput;
     public Transform playerBody;
+    public BlinkAnimation thisBlinkAnimation;
 
     public float ProjectileStartSpeed = 10;
 
@@ -14,9 +15,10 @@ public class Blink : MonoBehaviour
 
     private Rigidbody thisRigidBody;
     private SphereCollider thisSphereCollider;
+
+    [SerializeField]
     private MeshRenderer thisMeshRenderer;
 
-    
     [SerializeField]
     private Light greenLight;
     [SerializeField]
@@ -30,7 +32,6 @@ public class Blink : MonoBehaviour
     {
         thisRigidBody = transform.GetComponent<Rigidbody>();
         thisSphereCollider = transform.GetComponent<SphereCollider>();
-        thisMeshRenderer = transform.GetComponent<MeshRenderer>();
     }
 
     void FixedUpdate()
@@ -44,30 +45,40 @@ public class Blink : MonoBehaviour
     }
 
 
-    private void CheckBlinkStatus()
+    public void CheckBlinkStatus()
     {
         if (playerInput.wantsToLaunchBlink && isInHand)
         {
+            thisBlinkAnimation.LaunchedState(true);
             thisSphereCollider.enabled = true;
+            thisRigidBody.useGravity = true;
             greenLight.enabled = true;
             transform.parent = null;
-            thisMeshRenderer.material = activeBlinkMaterial;
             thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
             isInHand = false;
         }
 
-        if ((isInHand) || (playerInput.wantsToRecoverBlink && !isInHand))
+        if (playerInput.wantsToRecoverBlink && !isInHand)
         {
-
-            thisSphereCollider.enabled = false;
-            greenLight.enabled = false;
-            thisMeshRenderer.material = inactiveBlinkMaterial;
-            thisRigidBody.velocity = Vector3.zero;
-            thisRigidBody.angularVelocity = Vector3.zero;
-            transform.parent = positionInHand;
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.Euler(Vector3.zero);
-            isInHand = true;
+            thisBlinkAnimation.LaunchedState(false);
+            thisBlinkAnimation.DestroyAnimation(true);
+            StartCoroutine(PickUp());
         }
     }
+
+    private IEnumerator PickUp()
+    {
+        yield return new WaitForSeconds(3.8f);
+        thisBlinkAnimation.DestroyAnimation(false);
+        thisSphereCollider.enabled = false;
+        greenLight.enabled = false;
+        thisRigidBody.velocity = Vector3.zero;
+        thisRigidBody.angularVelocity = Vector3.zero;
+        thisRigidBody.useGravity = false;
+        transform.parent = positionInHand;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        isInHand = true;
+    }
+
 }
