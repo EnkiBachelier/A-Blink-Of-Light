@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerBody : MonoBehaviour
 {
-    public sbyte speed = 4;
-    public sbyte jump = 5;
-    public float turnSmoothTime = 0.2f;
-    private float turnSmoothVelocity;
-
+    #region Variables Declarations
+    [SerializeField]
+    private sbyte speed = 4;
+    [SerializeField]
+    private sbyte jump = 5;
+    [SerializeField]
+    private float turnSmoothTime = 0.2f;
+    [SerializeField]
+    private Transform cameraT;
+    [SerializeField]
+    private PlayerController playerInputs;
+    
     private Rigidbody rb;
+    private float turnSmoothVelocity;
     private bool onGround = true;
-
-    public Transform cameraT;
-    public PlayerController playerInputs;
+    #endregion
 
     void Start()
     {
@@ -55,7 +61,6 @@ public class PlayerBody : MonoBehaviour
         float currentSpeed = speed * directionNorm.magnitude;
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {

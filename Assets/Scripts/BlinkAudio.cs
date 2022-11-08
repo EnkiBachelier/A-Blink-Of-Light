@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BlinkAudio : MonoBehaviour
 {
-    private AudioSource thisAudioSource;
-    private float soundDelay = 0;
-    
+    #region Variables Declarations
     [SerializeField]
     private Blink thisBlink;
 
+    private AudioSource thisAudioSource;
+    private float soundDelay = 0;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {

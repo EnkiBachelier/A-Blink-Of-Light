@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class Blink : MonoBehaviour
 {
-    public PlayerController playerInput;
-    public Transform playerBody;
-    public BlinkAnimation thisBlinkAnimation;
-
-    public float ProjectileStartSpeed = 10;
-
+    #region Variables Declarations
     public bool isInHand { get; private set; } = false;
     public bool isMoving { get; private set; } = false;
 
-    private Rigidbody thisRigidBody;
-    private SphereCollider thisSphereCollider;
-
     [SerializeField]
-    private MeshRenderer thisMeshRenderer;
-
+    private PlayerController playerInput;
+    [SerializeField]
+    private Transform playerBody;
+    [SerializeField]
+    private BlinkAnimation thisBlinkAnimation;
+    [SerializeField]
+    private float ProjectileStartSpeed = 10;
     [SerializeField]
     private Light greenLight;
     [SerializeField]
     private Transform positionInHand;
-    [SerializeField]
-    private Material activeBlinkMaterial;
-    [SerializeField]
-    private Material inactiveBlinkMaterial;
+    
+    private Rigidbody thisRigidBody;
+    private SphereCollider thisSphereCollider;
+    #endregion
 
     private void Start()
     {
@@ -40,13 +37,16 @@ public class Blink : MonoBehaviour
             isMoving = true;
         else
             isMoving = false;
-
         CheckBlinkStatus();
     }
 
-
+    #region New Methods
+    //Either puts the Blink next to the player in inactive mode (no light, no bloom, ready to be launched)
+    //Or throw the Blink forward in active mode (light, bloom, collider, ready to be picked up)
+    //If the Blink is picked up, launches an animation
     public void CheckBlinkStatus()
     {
+        //If the player launches the Blink
         if (playerInput.wantsToLaunchBlink && isInHand)
         {
             thisBlinkAnimation.LaunchedState(true);
@@ -57,16 +57,17 @@ public class Blink : MonoBehaviour
             thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
             isInHand = false;
         }
-
-        if (playerInput.wantsToRecoverBlink && !isInHand)
+        //If the player pickes up the Blink
+        else if (playerInput.wantsToRecoverBlink && !isInHand)
         {
             thisBlinkAnimation.LaunchedState(false);
             thisBlinkAnimation.DestroyAnimation(true);
-            StartCoroutine(PickUp());
+            StartCoroutine(PickUpAnimation());
         }
     }
 
-    private IEnumerator PickUp()
+    //Used to display the PickUpAnimation and put the Blink in inactive mode after the animation 
+    private IEnumerator PickUpAnimation()
     {
         yield return new WaitForSeconds(3.8f);
         thisBlinkAnimation.DestroyAnimation(false);
@@ -80,5 +81,5 @@ public class Blink : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         isInHand = true;
     }
-
+    #endregion
 }

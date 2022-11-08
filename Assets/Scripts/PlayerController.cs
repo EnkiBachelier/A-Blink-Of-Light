@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables Declarations
     public bool wantsToJump { get; private set; } = false;
     public bool wantsToLaunchBlink { get; private set; } = false;
     public bool wantsToRecoverBlink { get; private set; } = false;
+    #endregion
 
-    // Update is called once per frame
     void Update()
     {
         #region Movement system
@@ -19,7 +20,5 @@ public class PlayerController : MonoBehaviour
         wantsToLaunchBlink = Input.GetMouseButtonDown(0);
         wantsToRecoverBlink = Input.GetMouseButtonDown(1);
         #endregion
-
-
     }
 }
