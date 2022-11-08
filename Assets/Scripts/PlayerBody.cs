@@ -15,7 +15,7 @@ public class PlayerBody : MonoBehaviour
     private Transform cameraT;
     [SerializeField]
     private PlayerController playerInputs;
-    
+
     private Rigidbody rb;
     private float turnSmoothVelocity;
     private bool onGround = true;
@@ -50,7 +50,7 @@ public class PlayerBody : MonoBehaviour
           
         */
         
-        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 direction = new Vector2(playerInputs.horizontalValue, playerInputs.verticalValue);
         Vector2 directionNorm = direction.normalized;
 
         if (directionNorm != Vector2.zero)

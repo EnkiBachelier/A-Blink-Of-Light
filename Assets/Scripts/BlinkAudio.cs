@@ -9,24 +9,26 @@ public class BlinkAudio : MonoBehaviour
     private Blink thisBlink;
 
     private AudioSource thisAudioSource;
-    private float soundDelay = 0;
     #endregion
-    // Start is called before the first frame update
+
     void Start()
     {
         thisAudioSource = GetComponent<AudioSource>();    
     }
 
-    // Update is called once per frame
     void Update()
     {
-        soundDelay -= Time.deltaTime;
-        if(!thisBlink.isMoving)
-            thisAudioSource.Pause();
-        else if (thisBlink.isMoving && soundDelay <= 0)
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (thisBlink.isMoving && !thisAudioSource.isPlaying)
         {
+            thisAudioSource.loop = true;
             thisAudioSource.Play();
-            soundDelay = 5;
         }
+        else if (!thisBlink.isMoving)
+            thisAudioSource.Stop();
+        
     }
 }

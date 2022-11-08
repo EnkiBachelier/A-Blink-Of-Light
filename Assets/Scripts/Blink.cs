@@ -34,7 +34,7 @@ public class Blink : MonoBehaviour
     void FixedUpdate()
     {
         //Used for the sound
-        if (thisRigidBody.velocity != Vector3.zero && !isInHand)
+        if (isItMoving(thisRigidBody.velocity) && !isInHand)
             isMoving = true;
         else
             isMoving = false;
@@ -43,6 +43,17 @@ public class Blink : MonoBehaviour
     }
 
     #region New Methods
+    private bool isItMoving (Vector3 velocityToCheck)
+    {
+        if (velocityToCheck.x > 1)
+            return true;
+        else if (velocityToCheck.y > 1)
+            return true;
+        else if (velocityToCheck.z > 1)
+            return true;
+        else
+            return false;
+    }
     //Either puts the Blink next to the player in inactive mode (no light, no bloom, ready to be launched)
     //Or throw the Blink forward in active mode (light, bloom, collider, ready to be picked up)
     //If the Blink is picked up, launches an animation
@@ -51,13 +62,13 @@ public class Blink : MonoBehaviour
         //If the player launches the Blink
         if (playerInput.wantsToLaunchBlink && isInHand)
         {
+            isInHand = false;
             thisBlinkAnimation.LaunchedState(true);
             thisSphereCollider.enabled = true;
             thisRigidBody.useGravity = true;
             greenLight.enabled = true;
             transform.parent = null;
             thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
-            isInHand = false;
         }
         //If the player pickes up the Blink
         else if (playerInput.wantsToRecoverBlink && !isInHand)
@@ -71,6 +82,7 @@ public class Blink : MonoBehaviour
     //Used to display the PickUpAnimation and put the Blink in inactive mode after the animation 
     private IEnumerator PickUpAnimation()
     {
+        isInHand = true;
         yield return new WaitForSeconds(3.8f);
         thisBlinkAnimation.DestroyAnimation(false);
         thisSphereCollider.enabled = false;
@@ -81,7 +93,6 @@ public class Blink : MonoBehaviour
         transform.parent = positionInHand;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        isInHand = true;
     }
     #endregion
 }
