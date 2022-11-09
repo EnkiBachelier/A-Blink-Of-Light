@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
 
         #region Movement system
         wantsToJump = Input.GetKeyDown(KeyCode.Space);
-        horizontalValue = Input.GetAxisRaw("Horizontal");
-        verticalValue = Input.GetAxisRaw("Vertical");
+        horizontalValue = Input.GetAxis("Horizontal");
+        verticalValue = Input.GetAxis("Vertical");
         #endregion
 
     }

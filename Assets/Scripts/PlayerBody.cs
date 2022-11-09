@@ -8,76 +8,64 @@ public class PlayerBody : MonoBehaviour
     [SerializeField]
     private sbyte speed = 4;
     [SerializeField]
-    private sbyte jump = 5;
-    [SerializeField]
-    private float turnSmoothTime = 0.2f;
-    [SerializeField]
-    private Transform cameraT;
-    [SerializeField]
     private PlayerController playerInputs;
     [SerializeField]
     private AudioSource thisAudioSource;
-    
-    private Rigidbody thisRigidbody;
-    private float turnSmoothVelocity;
+    [SerializeField]
+    private float mass = 3f;
+
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
+    public float gravity = -9.81f;
+    public float jumpHeight = 3f;
+
+    private Vector3 velocity;
+
     private bool isOnGround = true;
+    private CharacterController thisCharController;
     #endregion
 
     void Start()
     {
-        thisRigidbody = gameObject.GetComponent<Rigidbody>();
-        cameraT = Camera.main.transform;
+        thisCharController = GetComponent<CharacterController>();
     }
 
     void FixedUpdate()
     {
-        /*
-         
-        Un simple système de saut :
-            - On ajoute une force lorsque le joueur souhaite sauter
-            - isOnGround permet d'éviter les doubles sauts en devenant faux si le joueur initie le saut et vrai si il rentre en collision (voir après)
+        isOnGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        */
+        if (isOnGround && velocity.y < 0)
+            velocity.y = -2f; //not 0f because this might happen before we are on the ground, so to make sure the player IS indeed on the ground we put a slightly lower negative number
 
+        float horizontalValue = playerInputs.horizontalValue;
+        float verticalValue = playerInputs.verticalValue;
 
-        if (playerInputs.wantsToJump && isOnGround)
+        //Vector 3 move = new Vector3(x, 0f, z); --- FOR GLOBAL SPACE
+
+        //direction based on our x & z movement on local coordinates
+        Vector3 move = transform.right * horizontalValue + transform.forward * verticalValue;
+
+        //function Move, framerate independent & with a given speed
+        thisCharController.Move(move * speed * Time.fixedDeltaTime);
+
+        //to allow the player to jump
+        if (Input.GetButtonDown("Jump") && isOnGround)
         {
-            thisRigidbody.AddForce(Vector3.up * jump, ForceMode.Impulse);
-            isOnGround = false;
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        /*
-         
-        Le système de mouvement du joueur :
-            - 
-          
-        */
-        
-        Vector2 direction = new Vector2(playerInputs.horizontalValue, playerInputs.verticalValue);
-        Vector2 directionNorm = direction.normalized;
+        velocity.y += gravity * Time.fixedDeltaTime * mass;
+        thisCharController.Move(velocity * Time.fixedDeltaTime);
 
-        if (directionNorm != Vector2.zero)
-        {
-            float playerRotation = Mathf.Atan2(directionNorm.x, directionNorm.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, playerRotation, ref turnSmoothVelocity, turnSmoothTime);
-        }
-        float currentSpeed = speed * directionNorm.magnitude;
-        transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
-
-        if (currentSpeed != 0 && !thisAudioSource.isPlaying && isOnGround)
+        if ((horizontalValue != 0 || verticalValue != 0) && !thisAudioSource.isPlaying && isOnGround)
         {
             thisAudioSource.loop = true;
             thisAudioSource.Play();
         }
-        else if (currentSpeed == 0 || !isOnGround)
+        else if ((horizontalValue == 0 && verticalValue == 0) || !isOnGround)
             thisAudioSource.Stop();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!isOnGround)
-            isOnGround = true;
-
     }
 
 }

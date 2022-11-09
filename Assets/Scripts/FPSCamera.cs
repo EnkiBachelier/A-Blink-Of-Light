@@ -5,37 +5,31 @@ using UnityEngine;
 public class FPSCamera : MonoBehaviour
 {
     #region Variables Declarations
-    [SerializeField]
-    private float mouseSpeed = 4;
-    [SerializeField]
-    private Transform Player;
-    [SerializeField]
-    private float distanceToPlayer = 0;
-    [SerializeField]
-    private float upDownMax = 80;
-    [SerializeField]
-    private float upDownMin = -80;
-    [SerializeField]
-    private float rotationSmoothTime = 0.12f;
-
-
-    private Vector3 rotationSmoothVelocity;
-    private Vector3 currentRotation;
-    private float orbit;
-    private float upDown;
+    [SerializeField] private float mouseSensitivity = 50f;
+    [SerializeField] private float distanceToPlayer;
+    [SerializeField] private Transform playerBody;
+    private float xRotation = 0f;
     #endregion
-    void LateUpdate()
+
+    // Start is called before the first frame update
+    void Start()
     {
-        upDown -= Input.GetAxis("Mouse Y") * mouseSpeed;
-        orbit += Input.GetAxis("Mouse X") * mouseSpeed;
+    }
 
-        //Limitation on the vertical movements of the camera
-        upDown = Mathf.Clamp(upDown, upDownMin, upDownMax);
+    // Update is called once per frame
+    void Update()
+    {
+        //Time.deltaTime = amount of time that has gone by since the last update
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(upDown, orbit), ref rotationSmoothVelocity, rotationSmoothTime);
-        transform.eulerAngles = currentRotation;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        //We put the camera to a certain distance from the player
-        transform.position = Player.position - transform.forward * distanceToPlayer;
+        //Quaternions = rotations in Unity
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.Rotate(Vector3.up * mouseX);
+
+        transform.position = playerBody.position - transform.forward * distanceToPlayer;
     }
 }
