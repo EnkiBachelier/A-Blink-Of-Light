@@ -6,11 +6,11 @@ public class GlobalFunctions : MonoBehaviour
 {
     public static bool isItMoving(Vector3 velocityToCheck)
     {
-        if (velocityToCheck.x > 1)
+        if (velocityToCheck.x > 0.5)
             return true;
-        else if (velocityToCheck.y > 1)
+        else if (velocityToCheck.y > 0.5)
             return true;
-        else if (velocityToCheck.z > 1)
+        else if (velocityToCheck.z > 0.5)
             return true;
         else
             return false;

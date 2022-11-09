@@ -7,6 +7,7 @@ public class Blink : MonoBehaviour
     #region Variables Declarations
     public bool isInHand { get; private set; } = false;
     public bool isMoving { get; private set; } = false;
+    public bool isBeingPickedUp { get; private set; } = false;
 
     [SerializeField]
     private PlayerController playerInput;
@@ -62,6 +63,7 @@ public class Blink : MonoBehaviour
         //If the player pickes up the Blink
         else if (playerInput.wantsToRecoverBlink && !isInHand)
         {
+            isBeingPickedUp = true;
             thisBlinkAnimation.LaunchedState(false);
             thisBlinkAnimation.DestroyAnimation(true);
             StartCoroutine(PickUpAnimation());
@@ -72,6 +74,7 @@ public class Blink : MonoBehaviour
     private IEnumerator PickUpAnimation()
     {
         isInHand = true;
+        isMoving = false;
         yield return new WaitForSeconds(3.8f);
         thisBlinkAnimation.DestroyAnimation(false);
         thisSphereCollider.enabled = false;
@@ -82,6 +85,7 @@ public class Blink : MonoBehaviour
         transform.parent = positionInHand;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
+        isBeingPickedUp = false;
     }
     #endregion
 }

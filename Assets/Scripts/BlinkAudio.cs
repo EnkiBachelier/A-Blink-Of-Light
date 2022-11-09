@@ -5,21 +5,30 @@ using UnityEngine;
 public class BlinkAudio : MonoBehaviour
 {
     #region Variables Declarations
-    [SerializeField]
-    private Blink thisBlink;
-
+    [SerializeField] private Blink thisBlink;
+    [SerializeField] private AudioClip pickUpClip;
     private AudioSource thisAudioSource;
     #endregion
 
     void Start()
     {
-        thisAudioSource = GetComponent<AudioSource>();    
+        thisAudioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
     {
-        if (!thisBlink.isMoving)
+        if (!thisBlink.isMoving && !thisBlink.isBeingPickedUp)
             thisAudioSource.Stop();
+
+        if (thisBlink.isBeingPickedUp)
+            thisAudioSource.PlayOneShot(pickUpClip);
+
+        if (thisBlink.isBeingPickedUp && thisBlink.isMoving)
+        {
+            thisAudioSource.Stop();
+            thisAudioSource.PlayOneShot(pickUpClip);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,7 +36,7 @@ public class BlinkAudio : MonoBehaviour
         if (thisBlink.isMoving && !thisAudioSource.isPlaying)
         {
             thisAudioSource.loop = true;
-            Debug.Log("Start roll");
+            thisAudioSource.volume = 2f;
             thisAudioSource.Play();
         }
     }

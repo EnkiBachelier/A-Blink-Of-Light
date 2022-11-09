@@ -5,24 +5,17 @@ using UnityEngine;
 public class PlayerBody : MonoBehaviour
 {
     #region Variables Declarations
-    [SerializeField]
-    private sbyte speed = 4;
-    [SerializeField]
-    private PlayerController playerInputs;
-    [SerializeField]
-    private AudioSource thisAudioSource;
-    [SerializeField]
-    private float mass = 3f;
-
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
-
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
+    [SerializeField] private sbyte speed = 4;
+    [SerializeField] private PlayerController playerInputs;
+    [SerializeField] private AudioSource thisAudioSource;
+    [SerializeField] private float mass = 3f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float jumpHeight = 3f;
 
     private Vector3 velocity;
-
     private bool isOnGround = true;
     private CharacterController thisCharController;
     #endregion
@@ -35,7 +28,6 @@ public class PlayerBody : MonoBehaviour
     void FixedUpdate()
     {
         isOnGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
         if (isOnGround && velocity.y < 0)
             velocity.y = -2f; //not 0f because this might happen before we are on the ground, so to make sure the player IS indeed on the ground we put a slightly lower negative number
 
