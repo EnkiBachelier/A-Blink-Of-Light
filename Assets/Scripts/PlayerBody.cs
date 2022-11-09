@@ -15,32 +15,35 @@ public class PlayerBody : MonoBehaviour
     private Transform cameraT;
     [SerializeField]
     private PlayerController playerInputs;
-
-    private Rigidbody rb;
+    [SerializeField]
+    private AudioSource thisAudioSource;
+    
+    private Rigidbody thisRigidbody;
     private float turnSmoothVelocity;
-    private bool onGround = true;
+    private bool isOnGround = true;
     #endregion
 
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        thisRigidbody = gameObject.GetComponent<Rigidbody>();
         cameraT = Camera.main.transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         /*
          
         Un simple système de saut :
             - On ajoute une force lorsque le joueur souhaite sauter
-            - onGround permet d'éviter les doubles sauts en devenant faux si le joueur initie le saut et vrai si il rentre en collision (voir après)
+            - isOnGround permet d'éviter les doubles sauts en devenant faux si le joueur initie le saut et vrai si il rentre en collision (voir après)
 
         */
 
-        if (playerInputs.wantsToJump && onGround)
+
+        if (playerInputs.wantsToJump && isOnGround)
         {
-            rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
-            onGround = false;
+            thisRigidbody.AddForce(Vector3.up * jump, ForceMode.Impulse);
+            isOnGround = false;
         }
 
         /*
@@ -60,11 +63,21 @@ public class PlayerBody : MonoBehaviour
         }
         float currentSpeed = speed * directionNorm.magnitude;
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+
+        if (currentSpeed != 0 && !thisAudioSource.isPlaying && isOnGround)
+        {
+            thisAudioSource.loop = true;
+            thisAudioSource.Play();
+        }
+        else if (currentSpeed == 0 || !isOnGround)
+            thisAudioSource.Stop();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!onGround)
-            onGround = true;
+        if (!isOnGround)
+            isOnGround = true;
+
     }
+
 }

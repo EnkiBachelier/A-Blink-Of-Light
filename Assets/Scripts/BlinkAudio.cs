@@ -18,6 +18,8 @@ public class BlinkAudio : MonoBehaviour
 
     void Update()
     {
+        if (!thisBlink.isMoving)
+            thisAudioSource.Stop();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,10 +27,8 @@ public class BlinkAudio : MonoBehaviour
         if (thisBlink.isMoving && !thisAudioSource.isPlaying)
         {
             thisAudioSource.loop = true;
+            Debug.Log("Start roll");
             thisAudioSource.Play();
         }
-        else if (!thisBlink.isMoving)
-            thisAudioSource.Stop();
-        
     }
 }

@@ -20,7 +20,7 @@ public class Blink : MonoBehaviour
     private Light greenLight;
     [SerializeField]
     private Transform positionInHand;
-    
+
     private Rigidbody thisRigidBody;
     private SphereCollider thisSphereCollider;
     #endregion
@@ -34,7 +34,7 @@ public class Blink : MonoBehaviour
     void FixedUpdate()
     {
         //Used for the sound
-        if (isItMoving(thisRigidBody.velocity) && !isInHand)
+        if (GlobalFunctions.isItMoving(thisRigidBody.velocity) && !isInHand)
             isMoving = true;
         else
             isMoving = false;
@@ -43,17 +43,6 @@ public class Blink : MonoBehaviour
     }
 
     #region New Methods
-    private bool isItMoving (Vector3 velocityToCheck)
-    {
-        if (velocityToCheck.x > 1)
-            return true;
-        else if (velocityToCheck.y > 1)
-            return true;
-        else if (velocityToCheck.z > 1)
-            return true;
-        else
-            return false;
-    }
     //Either puts the Blink next to the player in inactive mode (no light, no bloom, ready to be launched)
     //Or throw the Blink forward in active mode (light, bloom, collider, ready to be picked up)
     //If the Blink is picked up, launches an animation
