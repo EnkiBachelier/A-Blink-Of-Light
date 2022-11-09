@@ -42,14 +42,15 @@ public class PlayerBody : MonoBehaviour
         //function Move, framerate independent & with a given speed
         thisCharController.Move(move * speed * Time.fixedDeltaTime);
 
+        velocity.y += gravity * Time.fixedDeltaTime * mass;
+        thisCharController.Move(velocity * Time.fixedDeltaTime);
+
         //to allow the player to jump
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (playerInputs.wantsToJump && isOnGround)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        velocity.y += gravity * Time.fixedDeltaTime * mass;
-        thisCharController.Move(velocity * Time.fixedDeltaTime);
 
         if ((horizontalValue != 0 || verticalValue != 0) && !thisAudioSource.isPlaying && isOnGround)
         {

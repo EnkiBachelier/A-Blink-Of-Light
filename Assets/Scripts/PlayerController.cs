@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         thisRigidbody = GetComponent<Rigidbody>();
     }
-    void FixedUpdate()
+    void Update()
     {
         #region Blink system
         wantsToLaunchBlink = Input.GetMouseButtonDown(0);
