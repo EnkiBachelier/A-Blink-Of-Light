@@ -18,11 +18,13 @@ public class PlayerBody : MonoBehaviour
     private Vector3 velocity;
     private bool isOnGround = true;
     private CharacterController thisCharController;
+    private NoiseStatus thisNoiseStatus;
     #endregion
 
     void Start()
     {
         thisCharController = GetComponent<CharacterController>();
+        thisNoiseStatus = GetComponent<NoiseStatus>();
     }
 
     void FixedUpdate()
@@ -58,10 +60,14 @@ public class PlayerBody : MonoBehaviour
         if ((horizontalValue != 0 || verticalValue != 0) && !thisAudioSource.isPlaying && isOnGround && !playerInputs.wantsToBeQuiet)
         {
             thisAudioSource.loop = true;
+            thisNoiseStatus.noiseLevel = (float)NoiseStatus.noiseLevelStatus.PlayerLevel;
             thisAudioSource.Play();
         }
         else if ((horizontalValue == 0 && verticalValue == 0) || !isOnGround || playerInputs.wantsToBeQuiet)
+        {
+            thisNoiseStatus.noiseLevel = (float)NoiseStatus.noiseLevelStatus.QuietLevel;
             thisAudioSource.Stop();
+        }
     }
 
 }
