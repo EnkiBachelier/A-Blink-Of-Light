@@ -752,3 +752,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBlink: {fileID: 7783373200586964680}
+  pickUpClip: {fileID: 0}
