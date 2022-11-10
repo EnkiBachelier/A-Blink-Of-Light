@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2855,7 +2855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &601159752
 Transform:
   m_ObjectHideFlags: 0
@@ -5992,7 +5992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1101650316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10409,7 +10409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisBlinkToFollow: {fileID: 43254852}
-  distanceUpToBlink: 1.4
+  distanceUpToBlink: 0.7
 --- !u!108 &2113190985
 Light:
   m_ObjectHideFlags: 0
@@ -10422,10 +10422,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.085321985, g: 0.254717, b: 0.044455323, a: 1}
-  m_Intensity: 8.56
-  m_Range: 2.4
-  m_SpotAngle: 26.967386
-  m_InnerSpotAngle: 18.769466
+  m_Intensity: 16.69
+  m_Range: 2.7
+  m_SpotAngle: 118.34773
+  m_InnerSpotAngle: 118.34773
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -10686,6 +10686,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2537054651057851238, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
+      propertyPath: m_Range
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537054651057851238, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
+      propertyPath: m_Intensity
+      value: 0.97
+      objectReference: {fileID: 0}
     - target: {fileID: 4146890018149787048, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
       propertyPath: Loop
       value: 1
@@ -10708,7 +10716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4392155553453091041, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3599999
+      value: 0.118
       objectReference: {fileID: 0}
     - target: {fileID: 4392155553453091041, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
       propertyPath: m_LocalPosition.z

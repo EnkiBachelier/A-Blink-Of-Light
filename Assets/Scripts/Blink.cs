@@ -21,6 +21,7 @@ public class Blink : MonoBehaviour
     private Light greenLight;
     [SerializeField]
     private Transform positionInHand;
+    [SerializeField] private Light spotLight;
 
     private Rigidbody thisRigidBody;
     private SphereCollider thisSphereCollider;
@@ -52,17 +53,20 @@ public class Blink : MonoBehaviour
         //If the player launches the Blink
         if (playerInput.wantsToLaunchBlink && isInHand)
         {
+            Debug.Log("Can and want to launch");
             isInHand = false;
             thisBlinkAnimation.LaunchedState(true);
             thisSphereCollider.enabled = true;
             thisRigidBody.useGravity = true;
             greenLight.enabled = true;
+            spotLight.enabled = true;
             transform.parent = null;
             thisRigidBody.AddForce(transform.forward * ProjectileStartSpeed, ForceMode.Impulse);
         }
         //If the player pickes up the Blink
         else if (playerInput.wantsToRecoverBlink && !isInHand)
         {
+            Debug.Log("Can and want to recover");
             isBeingPickedUp = true;
             thisBlinkAnimation.LaunchedState(false);
             thisBlinkAnimation.DestroyAnimation(true);
@@ -78,6 +82,7 @@ public class Blink : MonoBehaviour
         yield return new WaitForSeconds(3.8f);
         thisBlinkAnimation.DestroyAnimation(false);
         thisSphereCollider.enabled = false;
+        spotLight.enabled = false;
         greenLight.enabled = false;
         thisRigidBody.velocity = Vector3.zero;
         thisRigidBody.angularVelocity = Vector3.zero;
