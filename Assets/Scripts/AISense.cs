@@ -13,7 +13,7 @@ public abstract class AISense<Stimulus> : MonoBehaviour
 
     public Transform SenseTransform;
 
-    public float updateInterval = 0.3f;
+    public float updateInterval = 3.0f;
     private float updateTime = 0.0f;
 
     public bool ShowDebug = true;
