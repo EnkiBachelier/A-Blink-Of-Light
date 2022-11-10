@@ -2963,7 +2963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615565053}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.25, z: 1.9300001}
+  m_LocalPosition: {x: -0.165, y: -2.44, z: 1.9300001}
   m_LocalScale: {x: 5.3948, y: 4.5599184, z: 0.2201}
   m_Children: []
   m_Father: {fileID: 1955242597}
@@ -10822,6 +10822,10 @@ PrefabInstance:
       propertyPath: m_InnerSpotAngle
       value: 18.769466
       objectReference: {fileID: 0}
+    - target: {fileID: 7783373200586964680, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
+      propertyPath: spotLight
+      value: 
+      objectReference: {fileID: 2113190985}
     - target: {fileID: 7783373200586964680, guid: 0029bf12b5cc13d459e7f331f6cbddad, type: 3}
       propertyPath: playerBody
       value: 

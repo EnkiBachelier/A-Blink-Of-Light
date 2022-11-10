@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public bool wantsToJump { get; private set; } = false;
     public bool wantsToLaunchBlink { get; private set; } = false;
     public bool wantsToRecoverBlink { get; private set; } = false;
+    public bool wantsToBeQuiet { get; private set; } = false;
     public float horizontalValue { get; private set; } = 0;
     public float verticalValue { get; private set; } = 0;
     public Rigidbody thisRigidbody { get; private set; }
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         wantsToJump = Input.GetKeyDown(KeyCode.Space);
         horizontalValue = Input.GetAxis("Horizontal");
         verticalValue = Input.GetAxis("Vertical");
+        wantsToBeQuiet = Input.GetKey(KeyCode.P);
         #endregion
 
     }

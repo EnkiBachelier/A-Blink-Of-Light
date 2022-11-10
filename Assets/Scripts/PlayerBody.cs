@@ -40,7 +40,10 @@ public class PlayerBody : MonoBehaviour
         Vector3 move = transform.right * horizontalValue + transform.forward * verticalValue;
 
         //function Move, framerate independent & with a given speed
-        thisCharController.Move(move * speed * Time.fixedDeltaTime);
+        if(!playerInputs.wantsToBeQuiet)
+            thisCharController.Move(move * speed * Time.fixedDeltaTime);
+        else
+            thisCharController.Move(move * speed * 0.5f * Time.fixedDeltaTime);
 
         velocity.y += gravity * Time.fixedDeltaTime * mass;
         thisCharController.Move(velocity * Time.fixedDeltaTime);
@@ -52,12 +55,12 @@ public class PlayerBody : MonoBehaviour
         }
 
 
-        if ((horizontalValue != 0 || verticalValue != 0) && !thisAudioSource.isPlaying && isOnGround)
+        if ((horizontalValue != 0 || verticalValue != 0) && !thisAudioSource.isPlaying && isOnGround && !playerInputs.wantsToBeQuiet)
         {
             thisAudioSource.loop = true;
             thisAudioSource.Play();
         }
-        else if ((horizontalValue == 0 && verticalValue == 0) || !isOnGround)
+        else if ((horizontalValue == 0 && verticalValue == 0) || !isOnGround || playerInputs.wantsToBeQuiet)
             thisAudioSource.Stop();
     }
 
