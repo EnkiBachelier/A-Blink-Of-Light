@@ -13,6 +13,7 @@ public class AISenseHearing : AISense<HearingStimulus>
     public float maxDistance = 10;
     public float hearingThreshold = 0.5f;
     public static float lastLevelHeard = 0;
+
     protected override bool doSense(Transform obj, ref HearingStimulus sti)
     {
         NoiseStatus n = obj.GetComponent<NoiseStatus>();
@@ -20,9 +21,9 @@ public class AISenseHearing : AISense<HearingStimulus>
         if (n != null)
         {
             sti.alertLevel = n.noiseLevel;
-            lastLevelHeard = n.noiseLevel;
             if ((n.isHeardEverywhere && lastLevelHeard != (float)NoiseStatus.noiseLevelStatus.PlayerLevel) || (n.noiseLevel > hearingThreshold && (obj.position - transform.position).sqrMagnitude < maxDistance * maxDistance))
             {
+                lastLevelHeard = n.noiseLevel;
                 return true;
             }
         }
@@ -33,10 +34,9 @@ public class AISenseHearing : AISense<HearingStimulus>
     {
         lastLevelHeard = 0;
     }
-    public new void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
 
+    public void OnDrawGizmos()
+    {
         if (!ShowDebug)
             return;
 

@@ -11,8 +11,6 @@ public abstract class AISense<Stimulus> : MonoBehaviour
         Leave
     };
 
-    public Transform SenseTransform;
-
     public float updateInterval = 3.0f;
     private float updateTime = 0.0f;
 
@@ -23,12 +21,13 @@ public abstract class AISense<Stimulus> : MonoBehaviour
     public delegate void SenseEventHandler(Stimulus sti, Status sta);
     private event SenseEventHandler CallSenseEvent;
 
-    //On appelle de manière recurrente la gestion du sens.
-    //Si perception, on lance un event
+    public Status statusAI;
+
+    //We called for sense on a certain basis and if something is detected we launch an event
     void Update()
     {
         Stimulus stimulus;
-        Status sta = Status.Stay;
+        statusAI = Status.Stay;
 
         updateTime += Time.deltaTime;
         if (updateTime > updateInterval)
@@ -40,20 +39,20 @@ public abstract class AISense<Stimulus> : MonoBehaviour
                 stimulus = default(Stimulus);
                 if (doSense(t, ref stimulus))
                 {
-                    sta = Status.Stay;
+                    statusAI = Status.Stay;
                     if (!sensedObjects.Contains(t))
                     {
                         sensedObjects.Add(t);
-                        sta = Status.Enter;
+                        statusAI = Status.Enter;
                     }
-                    CallSenseEvent(stimulus, sta);
+                    CallSenseEvent(stimulus, statusAI);
                 }
                 else
                 {
                     if (sensedObjects.Contains(t))
                     {
-                        sta = Status.Leave;
-                        CallSenseEvent(stimulus, sta);
+                        statusAI = Status.Leave;
+                        CallSenseEvent(stimulus, statusAI);
                         sensedObjects.Remove(t);
                     }
                 }
@@ -62,38 +61,21 @@ public abstract class AISense<Stimulus> : MonoBehaviour
         }
     }
 
-    //A redefinir pour créer un nouveau sens
-    //Détermine si on a percu quelquechose, et dans ce cas, en donne les paramètres
+    //Determine if something is sensed
     protected abstract bool doSense(Transform obj, ref Stimulus sti);
 
-    //Appelée juste avant de checker tous les objets
-    //Peut etre redéfinie
     protected virtual void resetSense()
     {
 
     }
 
-    //A appeler depuis n'importe quel script qui veut s'abonner à cet event
     public void AddSenseHandler(SenseEventHandler handler)
     {
         CallSenseEvent += handler;
     }
 
-    //A appeler pour ajouter un objet à tracker
     public void AddObjectToTrack(Transform t)
     {
         trackedObjects.Add(t);
-    }
-
-    public void OnDrawGizmos()
-    {
-        if (!ShowDebug)
-            return;
-
-        Gizmos.color = Color.red;
-        foreach (Transform t in sensedObjects)
-        {
-            Gizmos.DrawLine(SenseTransform.position, t.position);
-        }
     }
 }
