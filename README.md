@@ -14,12 +14,15 @@ Commencé il y a 3 jour, l'état actuel du projet est le suivant :
 - Le joueur fait du bruit lorsqu'il marche
 - Le Blink possède des sons (lorsqu'il roule ou est récupéré)
 - Une IA qui se dirige au son est présente
-- Différents volumes sont présents : si l'IA est proche du joueur, des effets sont appliqués sur les lumières et permet d'avoir un rendu visuel de la proximité 
+- L'IA peut patrouiller de façon aléatoire
+- Le joueur peut gagner en lançant le Blink dans la sphère rouge emissive
+- Différents volumes URP sont présents : si l'IA est proche du joueur, des effets sont appliqués sur les lumières et permet d'avoir un rendu visuel de la proximité 
 - Un premier niveau basique a été implanté
 
 # Où se dirige le projet ?
 
 Les prochaines améliorations sont les suivantes :
 - L'incorporation des comportements des boids aux lucioles
-- Implémentation de sons pour l'IA
-- L'utilisation de Shaders
+- Implémentation de sons pour l'IA selon son statut (chasse ou non)
+- l'UI pour savoir quand le joueur gagne, perd
+- L'utilisation de Shaders pour la sphère rouge emissive (Effet de Fresnell
