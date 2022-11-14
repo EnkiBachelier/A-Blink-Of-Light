@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
-public class IG1EnemyController : AgentController
+public class AgentController : MonoBehaviour
 {
     #region Variables declarations
     [SerializeField] private GameObject eyes;
@@ -13,6 +12,7 @@ public class IG1EnemyController : AgentController
     private AISenseHearing thisHearingSense;
     private float randomShutEyes;
     private static bool isPatrolling = true;
+    public bool isHunting = false;
     private NavMeshAgent thisNavAgent;
     private static Vector3 debugRandomPosition;
     private static float debugRadius;
@@ -40,31 +40,28 @@ public class IG1EnemyController : AgentController
             eyes.SetActive(!eyes.activeInHierarchy);
             randomShutEyes = Random.Range(3, 6);
         }
-        
+
         //if the AI is not hunting, we make it patrolling
-        if (isPatrolling && !thisNavAgent.hasPath)
-            FindPathTo(RandomNavmeshLocation(radiusForPatrol));
+        if (isPatrolling || !thisNavAgent.hasPath)
+        {
+            if (!thisNavAgent.hasPath)
+                GlobalFunctions.FindPathTo(this.gameObject, RandomNavmeshLocation(radiusForPatrol));
+
+            isHunting = false;
+        }
+        else
+            isHunting = true;
     }
 
     //Activates at every sound stimulus (player, blink...)
     private void HandleHearing(HearingStimulus sti, AISense<HearingStimulus>.Status evt)
     {
-        if (evt == AISense<HearingStimulus>.Status.Enter)
-        {
-            Debug.Log("is Hunting");
-            isPatrolling = false;
-        }
-        else if (evt == AISense<HearingStimulus>.Status.Stay)
-        {
-            Debug.Log("is Waiting");
+        if (evt == AISense<HearingStimulus>.Status.Leave)
+            isPatrolling = true;
+        else
             isPatrolling = false;
 
-        }else if (evt == AISense<HearingStimulus>.Status.Leave)
-        {
-            Debug.Log("has stopped Hunting");
-            isPatrolling = true;
-        }
-        FindPathTo(sti.position);
+        GlobalFunctions.FindPathTo(this.gameObject, sti.position);
     }
 
     //Defines a random position on the navmesh in a given sphere
@@ -83,7 +80,7 @@ public class IG1EnemyController : AgentController
     }
 
     //Shows the patrolling sphere
-    public new void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(debugRandomPosition, debugRadius);

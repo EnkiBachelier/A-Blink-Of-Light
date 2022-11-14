@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class GlobalFunctions : MonoBehaviour
@@ -15,5 +16,10 @@ public class GlobalFunctions : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public static void FindPathTo(GameObject thisGO, Vector3 destination)
+    {
+        thisGO.GetComponent<NavMeshAgent>().SetDestination(destination);
     }
 }
