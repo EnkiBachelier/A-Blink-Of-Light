@@ -6,8 +6,8 @@ public class FPSCamera : MonoBehaviour
 {
     #region Variables Declarations
     [SerializeField] private float mouseSensitivity = 50f;
-    [SerializeField] private float distanceToPlayer;
     [SerializeField] private Transform playerBody;
+    public float distanceToPlayer;
     private float xRotation = 0f;
     #endregion
 

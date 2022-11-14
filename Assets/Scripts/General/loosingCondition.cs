@@ -6,17 +6,15 @@ public class loosingCondition : MonoBehaviour
 {
     [SerializeField] private PlayerController thisPlayer;
     [SerializeField] private AgentController thisAgent;
-    [SerializeField] private Camera thisCamera;
+    [SerializeField] private FPSCamera thisCamera;
+    [SerializeField] private Canvas endCanvas;
     [SerializeField] private float limitForCatch = 1;
 
     public static bool hasCaught = false;
-    private Animator thisPlayerAnimator;
-    private Animator thisCameraAnimator;
+    [SerializeField] private Animator thisPlayerAnimator;
 
     void Start()
     {
-        thisPlayerAnimator = thisPlayer.gameObject.GetComponent<Animator>();
-        thisCameraAnimator = thisCamera.GetComponent<Animator>();
     }
 
     void Update()
@@ -31,8 +29,10 @@ public class loosingCondition : MonoBehaviour
 
     private IEnumerator LooseAnimation()
     {
-        thisCameraAnimator.SetBool("isCaught", true);
-        yield return new WaitForSeconds(3.8f);
+        thisCamera.distanceToPlayer = 3;
+        thisPlayerAnimator.SetBool("isCaught", true);
+        yield return new WaitForSeconds(1.3f);
+        endCanvas.enabled = true;
         
         //UI
     }

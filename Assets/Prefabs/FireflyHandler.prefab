@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4393315694839119327}
   - component: {fileID: 4393315694839119314}
   - component: {fileID: 4393315694839119313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4393315695314813513}
   - component: {fileID: 4393315695314813514}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LightBooty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,8 +124,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.990566, g: 0.89012265, b: 0.07943219, a: 1}
-  m_Intensity: 0.02
-  m_Range: 0.2
+  m_Intensity: 0.04
+  m_Range: 0.42
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -166,7 +166,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: -0.0000000034827163}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4393315695538846309}
   - component: {fileID: 4393315695538846328}
   - component: {fileID: 4393315695538846311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4393315695976168187}
   - component: {fileID: 4393315695976168186}
   - component: {fileID: 4393315695976168185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 4393315696254741141}
   - component: {fileID: 4393315696254741140}
   - component: {fileID: 4393315696254741142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Booty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 4393315696421048638}
   - component: {fileID: 4393315696421048625}
   - component: {fileID: 4393315696421048624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 4393315696468202421}
   - component: {fileID: 4393315696468202440}
   - component: {fileID: 4393315696468202423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 4393315696490325716}
   - component: {fileID: 4393315696490325719}
   - component: {fileID: 4393315696490325718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: -5908502180571410833}
   - component: {fileID: 615373522}
   - component: {fileID: 615373523}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireflyHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,14 +720,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4393315696956294754}
-  m_LocalRotation: {x: 0.1472994, y: -0.6915945, z: -0.1472994, w: 0.6915945}
+  m_LocalRotation: {x: 0.24184473, y: -0.66446304, z: -0.24184473, w: 0.66446304}
   m_LocalPosition: {x: -1.9112, y: 1.5943, z: -0.52200705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4393315695976168188}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -24.047}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -40}
 --- !u!114 &-5908502180571410833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,6 +740,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15619bddb7423024bbc784fe7dd4354c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repulsionArea: 0.5
+  alignmentArea: 4
+  attractionArea: 6
+  repulsionStrength: 5
+  alignmentStrength: 3
+  attractionStrength: 15
+  minSpeed: 1
+  maxSpeed: 2
+  target: {x: 0, y: 0, z: 0}
+  forceTarget: 20
+  goToTarget: 0
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!82 &615373522
 AudioSource:
   m_ObjectHideFlags: 0
