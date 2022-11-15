@@ -2566,11 +2566,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisAgent: {fileID: 462501572}
   thatPlayer: {fileID: 2044329619152897227}
-  huntingClip: {fileID: 8300000, guid: c901fb49b3165ec43aedb56365b6d00d, type: 3}
-  caughtClip: {fileID: 8300000, guid: de545bd31b734c8409304c2124d68721, type: 3}
+  huntingClip: {fileID: 8300000, guid: d1f028595e6ee8c4495446b02508f8fc, type: 3}
+  caughtClip: {fileID: 8300000, guid: 6881b061aa810104783ad71591eb3194, type: 3}
   idleNoises:
   - {fileID: 8300000, guid: 2c4432aa211b1b446a177c82bfeccde7, type: 3}
   - {fileID: 8300000, guid: 490f96af965694046a3785a4bfd7ff62, type: 3}
+  - {fileID: 8300000, guid: d64af48300b63b54da81e46b6e71dec9, type: 3}
+  - {fileID: 8300000, guid: 37a14e4989bbae94f9aaa44ed5793efd, type: 3}
 --- !u!195 &462501565
 NavMeshAgent:
   m_ObjectHideFlags: 0
