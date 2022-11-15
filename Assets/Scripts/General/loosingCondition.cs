@@ -31,11 +31,12 @@ public class loosingCondition : MonoBehaviour
     {
         thisCamera.distanceToPlayer = 3;
         thisPlayerAnimator.SetBool("isCaught", true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(2);
         thisPlayerAnimator.SetBool("isCaught", false);
         hasCaught = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        thisAgent.gameObject.SetActive(false);
         endCanvas.gameObject.SetActive(true);
         winText.gameObject.SetActive(false);
         lossText.gameObject.SetActive(true);

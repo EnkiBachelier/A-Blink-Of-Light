@@ -10564,6 +10564,7 @@ MonoBehaviour:
   endCanvas: {fileID: 2012766091}
   lossText: {fileID: 865981349}
   winText: {fileID: 1676845969}
+  thisAgent: {fileID: 462501572}
 --- !u!135 &1673684908
 SphereCollider:
   m_ObjectHideFlags: 0
