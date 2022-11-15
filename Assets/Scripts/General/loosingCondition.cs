@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class loosingCondition : MonoBehaviour
 {
@@ -8,14 +9,12 @@ public class loosingCondition : MonoBehaviour
     [SerializeField] private AgentController thisAgent;
     [SerializeField] private FPSCamera thisCamera;
     [SerializeField] private Canvas endCanvas;
+    [SerializeField] private TextMeshProUGUI lossText;
     [SerializeField] private float limitForCatch = 1;
-
-    public static bool hasCaught = false;
     [SerializeField] private Animator thisPlayerAnimator;
 
-    void Start()
-    {
-    }
+    public static bool hasCaught = false;
+
 
     void Update()
     {
@@ -31,9 +30,12 @@ public class loosingCondition : MonoBehaviour
     {
         thisCamera.distanceToPlayer = 3;
         thisPlayerAnimator.SetBool("isCaught", true);
-        yield return new WaitForSeconds(1.3f);
-        endCanvas.enabled = true;
-        
-        //UI
+        yield return new WaitForSeconds(0.3f);
+        thisPlayerAnimator.SetBool("isCaught", false);
+        hasCaught = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        endCanvas.gameObject.SetActive(true);
+        lossText.gameObject.SetActive(true);
     }
 }

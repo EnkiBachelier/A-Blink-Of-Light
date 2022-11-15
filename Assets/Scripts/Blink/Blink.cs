@@ -9,18 +9,12 @@ public class Blink : MonoBehaviour
     public bool isMoving { get; private set; } = false;
     public bool isBeingPickedUp { get; private set; } = false;
 
-    [SerializeField]
-    private PlayerController playerInput;
-    [SerializeField]
-    private Transform playerBody;
-    [SerializeField]
-    private BlinkAnimation thisBlinkAnimation;
-    [SerializeField]
-    private float ProjectileStartSpeed = 10;
-    [SerializeField]
-    private Light greenLight;
-    [SerializeField]
-    private Transform positionInHand;
+    [SerializeField] private PlayerController playerInput;
+    [SerializeField] private Transform playerBody;
+    [SerializeField] private BlinkAnimation thisBlinkAnimation;
+    [SerializeField] private float ProjectileStartSpeed = 10;
+    [SerializeField] private Light greenLight;
+    [SerializeField] private Transform positionInHand;
     [SerializeField] private Light spotLight;
 
     private Rigidbody thisRigidBody;
