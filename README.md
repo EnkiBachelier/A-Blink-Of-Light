@@ -5,7 +5,7 @@ Ce projet utilise l'Universal Render Pipeline (URP) de Unity.
 
 # Comment lancer le projet ?
 
-Un exécutable est disponible dans le dossier "Executable". Vous n'avez qu'à le lancer pour commencer à jouer !
+Un exécutable est disponible dans le dossier "Executable". Vous n'avez qu'à lancer "A Blink Of Light.exe" pour commencer à jouer !
 
 # Comment jouer au jeu ?
 
