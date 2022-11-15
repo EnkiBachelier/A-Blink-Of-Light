@@ -10,6 +10,7 @@ public class loosingCondition : MonoBehaviour
     [SerializeField] private FPSCamera thisCamera;
     [SerializeField] private Canvas endCanvas;
     [SerializeField] private TextMeshProUGUI lossText;
+    [SerializeField] private TextMeshProUGUI winText;
     [SerializeField] private float limitForCatch = 1;
     [SerializeField] private Animator thisPlayerAnimator;
 
@@ -36,6 +37,7 @@ public class loosingCondition : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         endCanvas.gameObject.SetActive(true);
+        winText.gameObject.SetActive(false);
         lossText.gameObject.SetActive(true);
     }
 }
